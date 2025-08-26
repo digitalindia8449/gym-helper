@@ -787,6 +787,108 @@ function getYouTubeEmbed(url) {
 }
 
 /***************************
+ * LITE YOUTUBE (thumbnail → iframe on demand)
+ ***************************/
+function getYouTubeThumb(id) {
+  // tries best → fallback
+  return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+}
+
+function LiteYouTube({ url, title }) {
+  const id = getYouTubeId(url);
+  const start = parseStartSeconds(url);
+  const [activated, setActivated] = useState(false);
+  const containerRef = useRef(null);
+
+  // Optional: auto-activate when close to viewport (200px)
+  useEffect(() => {
+    if (!containerRef.current || activated) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            // comment this line if you ONLY want on click:
+            // setActivated(true);
+            io.disconnect();
+          }
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    io.observe(containerRef.current);
+    return () => io.disconnect();
+  }, [activated]);
+
+  if (!id) {
+    return (
+      <div className="aspect-video bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-900 dark:to-zinc-800 grid place-items-center text-xs text-gray-500">
+        Invalid YouTube URL
+      </div>
+    );
+  }
+
+  if (!activated) {
+    const thumb = getYouTubeThumb(id);
+    return (
+      <button
+        ref={containerRef}
+        type="button"
+        onClick={() => setActivated(true)}
+        className="relative aspect-video w-full overflow-hidden bg-black group"
+        aria-label={`Play ${title || "video"}`}
+      >
+        {/* Poster */}
+        <img
+          src={thumb}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-active:scale-[1.02]"
+          loading="lazy"
+          decoding="async"
+        />
+        {/* Play button */}
+        <div className="absolute inset-0 grid place-items-center">
+          <div className="rounded-full p-4 sm:p-5 bg-white/90 shadow-lg group-hover:bg-white text-black transition">
+            <Play className="w-6 h-6 sm:w-7 sm:h-7" />
+          </div>
+        </div>
+        {/* Small label */}
+        <div className="absolute bottom-2 right-2 text-[10px] px-1.5 py-0.5 rounded bg-black/60 text-white">
+          Tap to play
+        </div>
+      </button>
+    );
+  }
+
+  // Build embed only when activated
+  const params = new URLSearchParams({
+    autoplay: "1",
+    mute: "1",
+    controls: "1",
+    modestbranding: "1",
+    rel: "0",
+    playsinline: "1",
+    // For looping a single video, playlist must equal id (you had this already)
+    // Keeping loop off for faster UI; enable if you need:
+    // loop: "1", playlist: id,
+  });
+  if (start > 0) params.set("start", String(start));
+
+  const src = `https://www.youtube-nocookie.com/embed/${id}?${params.toString()}`;
+
+  return (
+    <iframe
+      className="w-full h-full aspect-video"
+      src={src}
+      title={title || "YouTube video"}
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerPolicy="origin-when-cross-origin"
+      allowFullScreen
+    />
+  );
+}
+
+/***************************
  * UI COMPONENTS
  ***************************/
 function Header({ selectedIndex, setSelectedIndex, onScrollToExercises }) {
@@ -951,17 +1053,8 @@ function ExerciseCard({ ex, anchorId }) {
         </ul>
 
         <div className="mt-2 rounded-xl overflow-hidden border dark:border-zinc-800">
-          {embed ? (
-            <div className="aspect-video bg-black">
-              <iframe
-                className="w-full h-full"
-                src={embed}
-                title={ex.name}
-                frameBorder="0"
-                allow="autoplay; encrypted-media; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
+          {ex.videoUrls?.[activeUrlIndex] ? (
+            <LiteYouTube url={ex.videoUrls[activeUrlIndex]} title={ex.name} />
           ) : (
             <div className="aspect-video bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-900 dark:to-zinc-800 grid place-items-center text-xs text-gray-500">
               Add a YouTube link in <code>videoUrls</code> to preview
