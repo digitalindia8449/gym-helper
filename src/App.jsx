@@ -320,16 +320,19 @@ const WEEK_PLAN = [
         videoUrls: ["https://youtu.be/65npK4Ijz1c?si=vjVqD3x3_aSY_LGf"],
         target: "Chest",
         cues: [
-          "Seat: handles at mid-chest.",
-          "Elbows ~45°.",
-          "Squeeze 1 sec at front.",
+          "Seat aise adjust karo ki handles mid-chest pe aaye.",
+          "Elbows ~45° rakho.",
+          "Front pe 1 sec squeeze karo.",
         ],
       },
       {
         name: "Chest Press Machine (Iso-Lateral)",
         videoUrls: ["https://youtu.be/hirXKlo8CNw?si=BF7CDpecimDKevbc"],
         target: "Chest",
-        cues: ["Press one arm at a time for balance.", "Don’t lock elbows."],
+        cues: [
+          "Ek time pe ek arm press karo balance ke liye.",
+          "Elbows lock mat karo.",
+        ],
       },
       {
         name: "Pec Deck (Neutral Grip)",
@@ -337,45 +340,63 @@ const WEEK_PLAN = [
           "https://www.youtube.com/watch?v=eGjt4lk6g34&ab_channel=PureGym",
         ],
         target: "Chest",
-        cues: ["Seat so elbows align with mid-chest."],
+        cues: ["Seat adjust karo taaki elbows mid-chest ke level pe ho."],
       },
 
       // 🏋️‍♂️ Weights (Barbell & Dumbbell)
       {
         name: "Incline Smith Press (30–35°)",
-        videoUrls: ["https://www.youtube.com/watch?v=1FWDde2IEPg"],
+        videoUrls: ["https://youtu.be/8urE8Z8AMQ4?si=mQC109T9rlcFMPEz"],
         target: "Upper Chest",
-        cues: ["Touch upper chest lightly.", "Wrists stacked under bar."],
+        cues: [
+          "Bar ko halka upper chest pe touch karo.",
+          "Wrists bar ke niche stacked rakho.",
+        ],
       },
       {
         name: "Flat Dumbbell Press",
         videoUrls: ["https://youtu.be/YQ2s_Y7g5Qk?si=4ubKaCc4w8JpL_bV"],
         target: "Chest",
-        cues: ["Elbows 75–90° at bottom.", "No bounce; control."],
+        cues: [
+          "Bottom pe elbows 75–90° rakho.",
+          "Bounce mat karo, control ke saath uthao.",
+        ],
       },
       {
         name: "Incline Dumbbell Press",
         videoUrls: ["https://youtu.be/5CECBjd7HLQ?si=FMobLXph12fhf4Gh"],
         target: "Upper Chest",
-        cues: ["Bench 30–45°.", "Arc towards eye-line."],
+        cues: [
+          "Bench ko 30–45° pe rakho.",
+          "Dumbbell arc eye-line ki taraf le jao.",
+        ],
       },
       {
         name: "Incline Dumbbell Hex Press",
         videoUrls: ["https://youtu.be/WgPIxxS_YZY?si=aTpGST9UGSY8xy_o"],
         target: "Inner/Upper Chest",
-        cues: ["Keep dumbbells squeezed together.", "Controlled tempo."],
+        cues: [
+          "Dono dumbbells tight squeeze karke rakho.",
+          "Tempo slow aur control me rakho.",
+        ],
       },
       {
         name: "Decline Barbell Press",
         videoUrls: ["https://www.youtube.com/watch?v=HwpYsDva4vs&t=10s"],
         target: "Lower Chest",
-        cues: ["Shoulder blades retracted.", "Touch lower chest."],
+        cues: [
+          "Shoulder blades ko tight retract karo.",
+          "Bar lower chest ko lightly touch kare.",
+        ],
       },
       {
         name: "Svend Press (Plate Crush Press)",
         videoUrls: ["https://youtu.be/2XmNv4T_Jfo?si=ewnSwTuaELll53NX&t=27s"],
         target: "Inner Chest",
-        cues: ["Squeeze plates together throughout.", "Control tempo."],
+        cues: [
+          "Plates ko pura time squeeze karke rakho.",
+          "Tempo control me rakho.",
+        ],
       },
 
       // 🤸 Free & Cable
@@ -383,41 +404,55 @@ const WEEK_PLAN = [
         name: "Cable Fly (High-to-Low)",
         videoUrls: ["https://youtu.be/hhruLxo9yZU?si=SZjOe304hljoGbrl"],
         target: "Lower/ Mid Chest",
-        cues: ["Soft elbows.", "Cross slightly for peak."],
+        cues: [
+          "Elbows thode soft rakho.",
+          "Thoda cross karo peak contraction ke liye.",
+        ],
       },
       {
         name: "Incline Cable Press",
         videoUrls: ["https://youtu.be/ftfzEH6hVtU?si=5s9IiT0QehzFzt1p"],
         target: "Upper Chest",
-        cues: ["Cables low to high.", "Press in slight arc toward eye line."],
+        cues: [
+          "Cables ko low se high rakho.",
+          "Press thoda arc me eye-line ki taraf karo.",
+        ],
       },
       {
         name: "Standing Cable Crossover (Low-to-High)",
         videoUrls: ["https://youtu.be/t2C-xkBrLZM?si=EHPZVdSWiwBROEIZ"],
         target: "Upper Chest",
-        cues: ["Arms sweep upward arc.", "Cross hands slightly at top."],
+        cues: [
+          "Arms ko upward arc me sweep karo.",
+          "Top pe hands thoda cross karo.",
+        ],
       },
       {
         name: "Single-Arm Cable Fly",
         videoUrls: ["https://youtu.be/blzp5vSV76A?si=9hsz1NoMmwFhLd3V&t=08s"],
         target: "Inner Chest",
-        cues: ["Step forward, slight torso twist.", "Pause at midline."],
+        cues: [
+          "Step forward karke thoda torso twist karo.",
+          "Midline pe pause karo.",
+        ],
       },
       {
         name: "Decline Push-Ups (Feet Up)",
         videoUrls: ["https://youtu.be/5QFjmotLfW4?si=JXuGtg2oANiD5PN-&t=28s"],
         target: "Lower Chest",
-        cues: ["Body straight; nose over hands."],
+        cues: ["Body straight rakho; nose hands ke upar ho."],
       },
       {
         name: "Push-Up with Resistance Band",
         videoUrls: ["hhttps://youtu.be/ogTYczFYYsU?si=ZuTJ3PFuWfEcKIa1&t=35s"],
         target: "Chest",
-        cues: ["Band across upper back.", "Full range, tight core."],
+        cues: [
+          "Band ko upper back pe set karo.",
+          "Full range rakho, core tight rakho.",
+        ],
       },
     ],
   },
-
   {
     day: "Tuesday",
     focus: "Back",
@@ -426,56 +461,136 @@ const WEEK_PLAN = [
     colorFrom: "from-indigo-100",
     colorTo: "to-sky-100",
     exercises: [
+      // -------- MACHINES --------
       {
-        name: "Assisted Pull-Up Machine",
-        videoUrls: ["https://www.youtube.com/watch?v=Q7B9GQ3wFIs"],
+        name: "Lat Pulldown (Wide/Medium Grip)",
+        videoUrls: ["https://youtu.be/c-4zw8TLjSk?si=d40nx2Vco80wOjr-&t=4s"],
         target: "Lats",
-        cues: ["Chest up; pull elbows to ribs."],
+        cues: [
+          "Bar ko collarbone tak lao",
+          "Elbows neeche kheecho, peeche nahi",
+          "Back seedhi rakho, thoda lean back chalega",
+        ],
       },
       {
-        name: "Lat Pulldown (Medium Grip)",
-        videoUrls: ["https://www.youtube.com/watch?v=CAwf7n6Luuc"],
-        target: "Lats",
-        cues: ["Stop at collarbone/upper chest."],
+        name: "Seated Cable Row (Neutral Grip)",
+        videoUrls: ["https://youtu.be/AfBKmXYkuDw?si=BkTmZ8Tfpj29R8vN"],
+        target: "Mid Back / Rhomboids",
+        cues: [
+          "Seedha baitho, chest bahar nikalo",
+          "Elbows piche kheecho aur squeeze karo",
+          "Weight jerk mat karo, control rakho",
+        ],
       },
       {
-        name: "Seated Cable Row (Neutral)",
-        videoUrls: ["https://www.youtube.com/watch?v=HJSVR_2fk8M"],
-        target: "Mid Back",
-        cues: ["Proud chest; squeeze shoulder blades."],
-      },
-      {
-        name: "Chest-Supported Row (Plate Machine)",
-        videoUrls: ["https://www.youtube.com/watch?v=2GgH3P1Q9aE"],
-        target: "Mid/Lower Lats",
-        cues: ["Drive elbows down & back."],
-      },
-      {
-        name: "One-Arm Dumbbell Row",
-        videoUrls: ["https://www.youtube.com/watch?v=pYcpY20QaE8"],
-        target: "Lats",
-        cues: ["Pull to hip; avoid twisting."],
+        name: "Chest-Supported Row (Machine)",
+        videoUrls: ["https://youtu.be/_FrrYQxA6kc?si=1VaR8AlrAUdA0lk9"],
+        target: "Mid Back / Rear Delt",
+        cues: [
+          "Bench/machine pe chest tight chipkake rakho",
+          "Elbows ko side se kheecho",
+          "Momentum use mat karo",
+        ],
       },
       {
         name: "Straight-Arm Pulldown (Cable)",
-        videoUrls: ["https://www.youtube.com/watch?v=G1T9-Cy_m6Y"],
+        videoUrls: ["https://youtu.be/G9uNaXGTJ4w?si=yPcATeHqFifrNToe"],
         target: "Lats",
-        cues: ["Arms nearly straight; arc path."],
+        cues: [
+          "Arms almost straight rakho",
+          "Arc bana ke neeche lao",
+          "Sirf back se pull feel karo, haath se nahi",
+        ],
       },
       {
-        name: "Face Pull (Rope)",
-        videoUrls: ["https://www.youtube.com/watch?v=rep-qVOkqgk"],
-        target: "Rear Delt/Upper Back",
-        cues: ["Elbows high; pull to eye level."],
+        name: "Face Pull (Rope on Cable)",
+        videoUrls: ["https://youtu.be/-MODnZdnmAQ?si=F2E158XEJo3qVi7X"],
+        target: "Rear Delt / Upper Back",
+        cues: [
+          "Rope ko aankh ke level tak kheecho",
+          "Elbows high rakho",
+          "Shoulder blades squeeze karo",
+        ],
+      },
+
+      // -------- WEIGHTS --------
+      {
+        name: "Barbell Bent-Over Row",
+        videoUrls: ["https://youtu.be/6FZHJGzMFEc?si=NpA2AmCniAV3U1uf"],
+        target: "Mid Back",
+        cues: [
+          "Back straight rakho, rounding mat karo",
+          "Bar ko waist tak kheecho",
+          "Top pe squeeze karo, neeche slow lao",
+        ],
+      },
+
+      {
+        name: "One-Arm Dumbbell Row",
+        videoUrls: ["https://youtu.be/DMo3HJoawrU?si=PjwdcEtXvHfUJlzZ"],
+        target: "Lats / Mid Back",
+        cues: [
+          "Dumbbell ko hip ki taraf kheecho",
+          "Torso stable rakho, twist mat karo",
+          "Top pe squeeze feel karo",
+        ],
       },
       {
-        name: "Back Extension / Hyper",
-        videoUrls: ["https://www.youtube.com/watch?v=ph3pddpKzzw"],
-        target: "Lower Back/Glutes",
-        cues: ["Neutral spine; 0–15° at top."],
+        name: "Deadlift (Conventional / Trap Bar)",
+        videoUrls: ["https://youtu.be/v709aJKv-gM?si=XyttR6iI7hr-Itcy"],
+        target: "Full Back / Posterior Chain",
+        cues: [
+          "Bar ko shins ke paas rakho",
+          "Back bilkul straight rakho",
+          "Heels se push karo, jerk mat maro",
+        ],
+      },
+      {
+        name: "Rack Pull (Partial Deadlift)",
+        videoUrls: ["https://youtu.be/GubpYDNyYes?si=JpI6a5hHU9tGz0RR"],
+        target: "Upper Back / Traps",
+        cues: [
+          "Bar ko knee ke upar set karo",
+          "Heavy weight ke liye best",
+          "Back tight rakho",
+        ],
+      },
+      {
+        name: "Shrugs (Dumbbell/Barbell)",
+        videoUrls: ["https://youtu.be/_t3lrPI6Ns4?si=Ga7c7ljhPAmG8xFf"],
+        target: "Traps",
+        cues: [
+          "Shoulders ko upar uthao, neck se mat kheecho",
+          "Top pe 1-2 sec hold karo",
+          "Slowly neeche lao",
+        ],
+      },
+
+      // -------- FREE BODYWEIGHT --------
+      {
+        name: "Pull-Up",
+        videoUrls: ["https://youtu.be/GRgWPT9XSQQ?si=eVTcmsKMbXXWqaAi"],
+        target: "Lats / Upper Back",
+        cues: [
+          "Shoulder blades pehle squeeze karo",
+          "Chest ko bar ke paas lao",
+          "Body jhatka mat do, control rakho",
+        ],
+      },
+      {
+        name: "45° Back Raise",
+        videoUrls: ["https://youtu.be/5_ejbGfdAQE?si=iGUNM4L5cWLfy1N1"],
+        target: "Lower Back / Glutes / Hamstrings",
+        cues: [
+          "Spine neutral rakho (jhukte waqt round mat karo)",
+          "Hip se hinge karo, kamar se nahi",
+          "Upar aate hi glutes tight squeeze karo",
+          "Top pe zyada hyperextend mat karo (sirf straight tak)",
+        ],
       },
     ],
   },
+
   {
     day: "Wednesday",
     focus: "Legs",
