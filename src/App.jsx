@@ -54,7 +54,7 @@ function useBeep() {
     return audioCtxRef.current;
   }
 
-  const tone = (freq = 880, duration = 120, gain = 0.15, type = "sine") => {
+  const tone = (freq = 880, duration = 120, gain = 0.4, type = "sine") => {
     const ctx = ensureCtx();
     if (!ctx) return;
     const o = ctx.createOscillator();
