@@ -922,8 +922,7 @@ function LiteYouTube({ url, title }) {
       (entries) => {
         for (const e of entries) {
           if (e.isIntersecting) {
-            // comment this line if you ONLY want on click:
-            // setActivated(true);
+            // setActivated(true); // keep click-to-play only
             io.disconnect();
           }
         }
@@ -962,19 +961,18 @@ function LiteYouTube({ url, title }) {
         />
         {/* Play button */}
         <div className="absolute inset-0 grid place-items-center">
-          <div className="rounded-full p-4 sm:p-5 bg-white/90 shadow-lg group-hover:bg-white text-black transition">
-            <Play className="w-6 h-6 sm:w-7 sm:h-7" />
+          <div className="rounded-full p-3 xs:p-4 sm:p-5 bg-white/90 shadow-lg group-hover:bg-white text-black transition">
+            <Play className="w-5 h-5 xs:w-6 xs:h-6 sm:w-7 sm:h-7" />
           </div>
         </div>
         {/* Small label */}
-        <div className="absolute bottom-2 right-2 text-[10px] px-1.5 py-0.5 rounded bg-black/60 text-white">
+        <div className="absolute bottom-1.5 right-1.5 text-[9px] xs:text-[10px] px-1.5 py-0.5 rounded bg-black/60 text-white">
           Tap to play
         </div>
       </button>
     );
   }
 
-  // Build embed only when activated
   const params = new URLSearchParams({
     autoplay: "1",
     mute: "1",
@@ -982,9 +980,6 @@ function LiteYouTube({ url, title }) {
     modestbranding: "1",
     rel: "0",
     playsinline: "1",
-    // For looping a single video, playlist must equal id (you had this already)
-    // Keeping loop off for faster UI; enable if you need:
-    // loop: "1", playlist: id,
   });
   if (start > 0) params.set("start", String(start));
 
@@ -1023,37 +1018,40 @@ function Header({ selectedIndex, setSelectedIndex, onScrollToExercises }) {
         shadow ? "shadow-sm" : ""
       }`}
     >
-      <div className="max-w-6xl mx-auto px-3 sm:px-4 py-3 sm:py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3 min-w-0">
-          <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 shadow flex items-center justify-center text-white font-bold text-sm sm:text-base">
+      {/* Ultra-responsive header row */}
+      <div className="max-w-6xl mx-auto px-2 xs:px-3 sm:px-4 py-2.5 xs:py-3 sm:py-4 flex flex-wrap gap-2 items-center justify-between">
+        <div className="flex items-center gap-2 xs:gap-3 min-w-0">
+          <div className="h-8 w-8 xs:h-9 xs:w-9 sm:h-10 sm:w-10 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 shadow flex items-center justify-center text-white font-bold text-xs xs:text-sm sm:text-base">
             GH
           </div>
           <div className="truncate">
-            <h1 className="text-lg sm:text-xl font-bold tracking-tight flex items-center gap-2">
-              Gym Helper <Dumbbell className="w-5 h-5 hidden sm:block" />
+            <h1 className="text-base xs:text-lg sm:text-xl font-bold tracking-tight flex items-center gap-1.5 xs:gap-2">
+              Gym Helper <Dumbbell className="w-4 h-4 sm:w-5 sm:h-5 hidden xs:block" />
             </h1>
-            <p className="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400">
+            <p className="text-[10px] xs:text-[11px] sm:text-xs text-gray-500 dark:text-gray-400">
               Simple · Hinglish · Beginner-friendly
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+
+        {/* Compact pager always visible */}
+        <div className="flex items-center gap-1.5 xs:gap-2">
           <button
             onClick={goPrev}
-            className="px-3 py-2 rounded-xl border hover:bg-gray-50 dark:hover:bg-zinc-800 dark:border-zinc-800"
+            className="px-2.5 py-1.5 xs:px-3 xs:py-2 rounded-xl border hover:bg-gray-50 dark:hover:bg-zinc-800 dark:border-zinc-800"
             aria-label="Previous day"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
           <div
-            className="text-xs sm:text-sm font-medium w-32 sm:w-40 text-center truncate"
+            className="text-[11px] xs:text-xs sm:text-sm font-medium w-28 xs:w-32 sm:w-40 text-center truncate"
             aria-live="polite"
           >
             {WEEK_PLAN[selectedIndex].day} · {WEEK_PLAN[selectedIndex].focus}
           </div>
           <button
             onClick={goNext}
-            className="px-3 py-2 rounded-xl border hover:bg-gray-50 dark:hover:bg-zinc-800 dark:border-zinc-800"
+            className="px-2.5 py-1.5 xs:px-3 xs:py-2 rounded-xl border hover:bg-gray-50 dark:hover:bg-zinc-800 dark:border-zinc-800"
             aria-label="Next day"
           >
             <ChevronRight className="w-4 h-4" />
@@ -1066,38 +1064,37 @@ function Header({ selectedIndex, setSelectedIndex, onScrollToExercises }) {
 
 function DayGrid({ selectedIndex, onSelect, onScrollToExercises }) {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3">
+    <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2.5 xs:gap-3">
       {WEEK_PLAN.map((d, idx) => (
         <button
           key={d.day}
           onClick={() => {
             onSelect(idx);
-            // Defer until after React commits the new day, then scroll
             requestAnimationFrame(() => {
               requestAnimationFrame(() => {
                 onScrollToExercises();
               });
             });
           }}
-          className={`text-left rounded-2xl p-4 border shadow-sm hover:shadow-md transition bg-gradient-to-br ${
+          className={`text-left rounded-2xl p-3 xs:p-4 border shadow-sm hover:shadow-md transition bg-gradient-to-br ${
             d.colorFrom
           } ${d.colorTo} ${
             idx === selectedIndex ? "ring-2 ring-indigo-400" : ""
-          } dark:border-zinc-800`}
+          } dark:border-zinc-800 min-h-[84px]`}
         >
           <div className="flex items-center justify-between gap-2">
-            <div>
-              <div className="text-xs text-gray-600 dark:text-gray-400">
+            <div className="min-w-0">
+              <div className="text-[10px] xs:text-xs text-gray-600 dark:text-gray-400">
                 {d.day}
               </div>
-              <div className="font-semibold flex items-center gap-2">
+              <div className="font-semibold text-sm xs:text-base flex items-center gap-1.5 xs:gap-2">
                 {d.emoji} {d.focus}
               </div>
-              <div className="text-[11px] mt-1 text-gray-500 dark:text-gray-400">
+              <div className="text-[10px] xs:text-[11px] mt-1 text-gray-500 dark:text-gray-400">
                 Tap to open
               </div>
             </div>
-            <BodySvg part={d.part} />
+            <BodySvg part={d.part} className="w-8 h-8 xs:w-10 xs:h-10" />
           </div>
         </button>
       ))}
@@ -1131,21 +1128,23 @@ function ExerciseCard({ ex, anchorId }) {
       onClick={onCenter}
       className="rounded-2xl border bg-white dark:bg-zinc-950 dark:border-zinc-800 shadow-sm overflow-hidden cursor-pointer"
     >
-      <div className="p-4 space-y-3">
-        <div className="flex items-start justify-between gap-3">
+      <div className="p-3 xs:p-4 space-y-2.5 xs:space-y-3">
+        <div className="flex items-start justify-between gap-2 xs:gap-3">
           <div className="min-w-0">
-            <h4 className="font-semibold leading-tight">{ex.name}</h4>
-            <div className="text-[11px] text-gray-500 dark:text-gray-400">
+            <h4 className="font-semibold leading-tight text-sm xs:text-base">
+              {ex.name}
+            </h4>
+            <div className="text-[10px] xs:text-[11px] text-gray-500 dark:text-gray-400">
               Target: {ex.target || "—"}
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 xs:gap-2 shrink-0">
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 quickRest(60);
               }}
-              className="text-xs px-2 py-1 rounded-lg border dark:border-zinc-800"
+              className="text-[10px] xs:text-xs px-2 py-1 rounded-lg border dark:border-zinc-800"
             >
               Rest 1:00
             </button>
@@ -1154,14 +1153,14 @@ function ExerciseCard({ ex, anchorId }) {
                 e.stopPropagation();
                 quickRest(90);
               }}
-              className="text-xs px-2 py-1 rounded-lg border dark:border-zinc-800"
+              className="text-[10px] xs:text-xs px-2 py-1 rounded-lg border dark:border-zinc-800"
             >
               1:30
             </button>
           </div>
         </div>
 
-        <ul className="list-disc pl-5 text-sm text-gray-700 dark:text-gray-300 space-y-1">
+        <ul className="list-disc pl-4 xs:pl-5 text-[13px] xs:text-sm text-gray-700 dark:text-gray-300 space-y-1">
           {ex.cues.map((c, i) => (
             <li key={i}>{c}</li>
           ))}
@@ -1178,7 +1177,7 @@ function ExerciseCard({ ex, anchorId }) {
         </div>
 
         {ex.videoUrls?.length > 1 && (
-          <div className="flex flex-wrap items-center gap-2 text-xs">
+          <div className="flex flex-wrap items-center gap-1.5 xs:gap-2 text-[10px] xs:text-xs">
             {ex.videoUrls.map((u, i) => (
               <button
                 key={i}
@@ -1197,7 +1196,7 @@ function ExerciseCard({ ex, anchorId }) {
         )}
 
         {ex.videoUrls?.[activeUrlIndex] && (
-          <div className="flex items-center gap-2 text-xs">
+          <div className="flex items-center gap-2 text-[10px] xs:text-xs">
             <a
               href={ex.videoUrls[activeUrlIndex]}
               target="_blank"
@@ -1221,12 +1220,12 @@ function DayDetail({ day, filter }) {
       (ex.target || "").toLowerCase().includes(filter)
   );
   return (
-    <div className="space-y-4">
+    <div className="space-y-3 xs:space-y-4">
       {filtered.map((ex, idx) => (
         <ExerciseCard key={ex.name} ex={ex} anchorId={`${day.day}-${idx}`} />
       ))}
       {filtered.length === 0 && (
-        <div className="text-sm text-gray-500 dark:text-gray-400 border dark:border-zinc-800 rounded-xl p-4 bg-white dark:bg-zinc-950">
+        <div className="text-sm text-gray-500 dark:text-gray-400 border dark:border-zinc-800 rounded-xl p-3 xs:p-4 bg-white dark:bg-zinc-950">
           No exercise matched your search.
         </div>
       )}
@@ -1241,7 +1240,7 @@ function QuickTimerChips() {
   const { setSeconds, setRunning } = useTimer();
   const presets = [45, 60, 90, 120, 180];
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-1.5 xs:gap-2">
       {presets.map((p) => (
         <button
           key={p}
@@ -1249,7 +1248,7 @@ function QuickTimerChips() {
             setSeconds(p);
             setRunning(true);
           }}
-          className="px-3 py-1 rounded-full border text-xs bg-white hover:bg-gray-50 shadow-sm dark:bg-zinc-900 dark:border-zinc-800 dark:hover:bg-zinc-800"
+          className="px-2.5 xs:px-3 py-1 rounded-full border text-[10px] xs:text-xs bg-white hover:bg-gray-50 shadow-sm dark:bg-zinc-900 dark:border-zinc-800 dark:hover:bg-zinc-800"
         >
           {p >= 60
             ? `${Math.floor(p / 60)}:${String(p % 60).padStart(2, "0")}`
@@ -1301,14 +1300,16 @@ function TimerSheet() {
             initial={{ y: 40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 40, opacity: 0 }}
-            className="relative w-full sm:w-[440px] max-w-[94vw] mx-auto bg-white dark:bg-zinc-900 rounded-t-2xl sm:rounded-2xl shadow-2xl p-4 border dark:border-zinc-800"
+            className="relative w-full sm:w-[440px] max-w-[94vw] mx-auto bg-white dark:bg-zinc-900 rounded-t-2xl sm:rounded-2xl shadow-2xl p-3 xs:p-4 border dark:border-zinc-800"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="p-2 rounded-xl bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900/40 dark:to-purple-900/40">
                   <Clock className="w-5 h-5" />
                 </div>
-                <div className="font-semibold">Workout Timer</div>
+                <div className="font-semibold text-sm xs:text-base">
+                  Workout Timer
+                </div>
               </div>
               <button
                 onClick={() => setSheetOpen(false)}
@@ -1319,43 +1320,43 @@ function TimerSheet() {
               </button>
             </div>
 
-            <div className="mt-3 text-6xl font-bold tabular-nums text-center tracking-wider">
+            <div className="mt-2 xs:mt-3 text-5xl xs:text-6xl font-bold tabular-nums text-center tracking-wider">
               {formatMMSS(seconds)}
             </div>
 
-            <div className="mt-4 grid grid-cols-3 gap-2">
+            <div className="mt-3 xs:mt-4 grid grid-cols-3 gap-2">
               <button
                 onClick={start}
                 className="py-2 rounded-xl shadow border bg-green-50 hover:bg-green-100 dark:bg-green-900/30 dark:hover:bg-green-900/50 dark:border-zinc-800 flex items-center justify-center gap-2"
               >
                 <Play className="w-4 h-4" />
-                Start
+                <span className="text-sm">Start</span>
               </button>
               <button
                 onClick={pause}
                 className="py-2 rounded-xl shadow border bg-amber-50 hover:bg-amber-100 dark:bg-amber-900/30 dark:hover:bg-amber-900/50 dark:border-zinc-800 flex items-center justify-center gap-2"
               >
                 <Pause className="w-4 h-4" />
-                Pause
+                <span className="text-sm">Pause</span>
               </button>
               <button
                 onClick={stop}
                 className="py-2 rounded-xl shadow border bg-rose-50 hover:bg-rose-100 dark:bg-rose-900/30 dark:hover:bg-rose-900/50 dark:border-zinc-800 flex items-center justify-center gap-2"
               >
                 <Stop className="w-4 h-4" />
-                Stop
+                <span className="text-sm">Stop</span>
               </button>
             </div>
 
-            <div className="mt-4 flex items-center justify-between gap-3 flex-wrap">
-              <div className="flex items-center gap-2 text-sm">
-                <span>Set:</span>
+            <div className="mt-3 xs:mt-4 flex items-center justify-between gap-2 xs:gap-3 flex-wrap">
+              <div className="flex items-center gap-1.5 xs:gap-2 text-sm">
+                <span className="text-xs xs:text-sm">Set:</span>
                 <input
                   type="number"
                   min={0}
                   value={mins}
                   onChange={(e) => setMins(Number(e.target.value))}
-                  className="w-20 px-2 py-1 rounded-lg border dark:border-zinc-800 dark:bg-zinc-950"
+                  className="w-16 xs:w-20 px-2 py-1 rounded-lg border dark:border-zinc-800 dark:bg-zinc-950"
                   aria-label="Minutes"
                 />
                 :
@@ -1365,16 +1366,16 @@ function TimerSheet() {
                   max={59}
                   value={secs}
                   onChange={(e) => setSecs(Number(e.target.value))}
-                  className="w-20 px-2 py-1 rounded-lg border dark:border-zinc-800 dark:bg-zinc-950"
+                  className="w-16 xs:w-20 px-2 py-1 rounded-lg border dark:border-zinc-800 dark:bg-zinc-950"
                   aria-label="Seconds"
                 />
               </div>
-              <div className="flex gap-2 flex-wrap">
+              <div className="flex gap-1.5 xs:gap-2 flex-wrap">
                 {[45, 60, 90, 120, 180, 300].map((p) => (
                   <button
                     key={p}
                     onClick={() => reset(p)}
-                    className="px-2 py-1 rounded-lg border text-xs bg-white hover:bg-gray-50 dark:bg-zinc-900 dark:border-zinc-800 dark:hover:bg-zinc-800"
+                    className="px-2 py-1 rounded-lg border text-[10px] xs:text-xs bg-white hover:bg-gray-50 dark:bg-zinc-900 dark:border-zinc-800 dark:hover:bg-zinc-800"
                   >
                     {p >= 60
                       ? `${Math.floor(p / 60)}:${String(p % 60).padStart(
@@ -1387,7 +1388,7 @@ function TimerSheet() {
               </div>
             </div>
 
-            <div className="mt-3 text-xs text-gray-500 dark:text-gray-400">
+            <div className="mt-2 xs:mt-3 text-[11px] xs:text-xs text-gray-500 dark:text-gray-400">
               Tip: Use quick chips or set exact mm:ss. Timer persists across
               refresh & pages.
             </div>
@@ -1403,10 +1404,11 @@ function FloatingTimerButton() {
   return (
     <button
       onClick={() => setSheetOpen(true)}
-      className="fixed bottom-5 right-5 z-50 px-4 py-3 rounded-full shadow-2xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex items-center gap-2 active:scale-[.98] focus:outline-none focus:ring-4 ring-indigo-300 dark:ring-indigo-800"
+      // ⬇️ move a little up on phones so it doesn't collide with MobileBar
+      className="fixed bottom-20 sm:bottom-6 right-4 sm:right-5 z-50 px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-full shadow-2xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex items-center gap-1.5 sm:gap-2 active:scale-[.98] focus:outline-none focus:ring-4 ring-indigo-300 dark:ring-indigo-800"
     >
       <Clock className="w-4 h-4" />
-      <span className="font-semibold text-sm">
+      <span className="font-semibold text-xs sm:text-sm">
         {running ? "Running" : "Timer"} · {formatMMSS(seconds)}
       </span>
     </button>
@@ -1416,13 +1418,13 @@ function FloatingTimerButton() {
 function QuickTimerBar() {
   const { seconds, running } = useTimer();
   return (
-    <div className="sticky top-[56px] z-30 bg-white/80 dark:bg-zinc-950/70 backdrop-blur border-b dark:border-zinc-800">
-      <div className="max-w-6xl mx-auto px-4 py-2 flex items-center gap-3">
-        <div className="text-xs text-gray-600 dark:text-gray-400 hidden sm:block">
+    <div className="sticky top-[52px] sm:top-[56px] z-30 bg-white/80 dark:bg-zinc-950/70 backdrop-blur border-b dark:border-zinc-800">
+      <div className="max-w-6xl mx-auto px-2 xs:px-3 sm:px-4 py-1.5 xs:py-2 flex items-center gap-2">
+        <div className="text-[10px] xs:text-xs text-gray-600 dark:text-gray-400 hidden sm:block">
           Quick Rest:
         </div>
         <QuickTimerChips />
-        <div className="ml-auto text-xs text-gray-500 dark:text-gray-400">
+        <div className="ml-auto text-[10px] xs:text-xs text-gray-500 dark:text-gray-400">
           {running ? "Counting" : "Idle"} · {formatMMSS(seconds)}
         </div>
       </div>
@@ -1437,28 +1439,28 @@ function MobileBar({ onPrev, onNext }) {
   const { setSeconds, setRunning } = useTimer();
   return (
     <div className="fixed bottom-0 inset-x-0 z-40 sm:hidden border-t bg-white/95 dark:bg-zinc-950/95 backdrop-blur dark:border-zinc-800">
-      <div className="px-3 py-2 grid grid-cols-3 gap-2 items-center">
+      <div className="px-2.5 py-2 grid grid-cols-3 gap-1.5 items-center">
         <button
           onClick={onPrev}
-          className="px-3 py-2 rounded-xl border dark:border-zinc-800 flex items-center justify-center gap-2"
+          className="px-3 py-2 rounded-xl border dark:border-zinc-800 flex items-center justify-center gap-1.5"
         >
           <ChevronLeft className="w-4 h-4" />
-          Prev
+          <span className="text-xs">Prev</span>
         </button>
         <button
           onClick={() => {
             setSeconds(60);
             setRunning(true);
           }}
-          className="px-3 py-2 rounded-xl shadow bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex items-center justify-center gap-2"
+          className="px-3 py-2 rounded-xl shadow bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex items-center justify-center gap-1.5"
         >
-          <Clock className="w-4 h-4" /> 1:00 Rest
+          <Clock className="w-4 h-4" /> <span className="text-xs">1:00 Rest</span>
         </button>
         <button
           onClick={onNext}
-          className="px-3 py-2 rounded-xl border dark:border-zinc-800 flex items-center justify-center gap-2"
+          className="px-3 py-2 rounded-xl border dark:border-zinc-800 flex items-center justify-center gap-1.5"
         >
-          Next
+          <span className="text-xs">Next</span>
           <ChevronRight className="w-4 h-4" />
         </button>
       </div>
@@ -1508,24 +1510,24 @@ export default function App() {
 
         <QuickTimerBar />
 
-        <main className="max-w-6xl mx-auto p-3 sm:p-4 pb-28 sm:pb-10 space-y-6">
+        <main className="max-w-6xl mx-auto p-2 xs:p-3 sm:p-4 pb-32 sm:pb-10 space-y-4 xs:space-y-6">
           <section>
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-base sm:text-lg font-semibold flex items-center gap-2">
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5 xs:mb-3">
+              <h2 className="text-sm xs:text-base sm:text-lg font-semibold flex items-center gap-1.5 xs:gap-2">
                 7-Day Simple Structure{" "}
                 <Heart className="w-4 h-4 hidden sm:block" />
               </h2>
-              <div className="hidden sm:flex items-center gap-2">
+              <div className="flex items-center gap-1.5 xs:gap-2">
                 <button
                   onClick={goPrev}
-                  className="px-3 py-2 rounded-xl border dark:border-zinc-800 hover:bg-gray-50 dark:hover:bg-zinc-800"
+                  className="px-2.5 py-1.5 xs:px-3 xs:py-2 rounded-xl border dark:border-zinc-800 hover:bg-gray-50 dark:hover:bg-zinc-800"
                   aria-label="Previous day"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
                 <button
                   onClick={goNext}
-                  className="px-3 py-2 rounded-xl border dark:border-zinc-800 hover:bg-gray-50 dark:hover:bg-zinc-800"
+                  className="px-2.5 py-1.5 xs:px-3 xs:py-2 rounded-xl border dark:border-zinc-800 hover:bg-gray-50 dark:hover:bg-zinc-800"
                   aria-label="Next day"
                 >
                   <ChevronRight className="w-4 h-4" />
@@ -1541,22 +1543,22 @@ export default function App() {
 
           <section
             ref={exerciseSectionRef}
-            className="bg-white/70 dark:bg-zinc-950/60 backdrop-blur rounded-2xl border dark:border-zinc-800 p-3 sm:p-4"
+            className="bg-white/70 dark:bg-zinc-950/60 backdrop-blur rounded-2xl border dark:border-zinc-800 p-2.5 xs:p-3 sm:p-4"
           >
-            <div className="mb-4 flex items-center gap-3 flex-wrap">
-              <div className="flex-1 min-w-[220px] flex items-center gap-2 px-3 py-2 rounded-xl border bg-white dark:bg-zinc-900 dark:border-zinc-800">
-                <Search className="w-4 h-4 text-gray-500" />
+            <div className="mb-3 xs:mb-4 flex flex-wrap items-center gap-2">
+              <div className="flex-1 min-w-[210px] flex items-center gap-2 px-2.5 xs:px-3 py-1.5 xs:py-2 rounded-xl border bg-white dark:bg-zinc-900 dark:border-zinc-800">
+                <Search className="w-4 h-4 text-gray-500 shrink-0" />
                 <input
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value.toLowerCase())}
                   placeholder="Search exercise or target (e.g., biceps, chest)..."
-                  className="w-full outline-none text-sm bg-transparent"
+                  className="w-full outline-none text-[13px] xs:text-sm bg-transparent"
                 />
               </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">
+              <div className="text-[12px] xs:text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">
                 <BodySvg
                   part={selectedDay.part}
-                  className="w-7 h-7 sm:w-8 sm:h-8"
+                  className="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8"
                 />
                 <span className="font-semibold">{selectedDay.day}:</span>{" "}
                 {selectedDay.focus}
@@ -1565,7 +1567,7 @@ export default function App() {
             <DayDetail day={selectedDay} filter={searchText} />
           </section>
 
-          <footer className="py-10 text-center text-[11px] sm:text-xs text-gray-500 dark:text-gray-400">
+          <footer className="py-10 text-[10px] xs:text-[11px] sm:text-xs text-center text-gray-500 dark:text-gray-400">
             Made for beginners · You can add or reorder videoUrls for each
             exercise.
             <br />
