@@ -306,114 +306,117 @@ const BodySvg = ({ part = "full", className = "w-10 h-10" }) => {
  * Note: Each exercise can have multiple videoUrls; first one auto-embeds.
  ***************************/
 const WEEK_PLAN = [
- {
-  day: "Monday",
-  focus: "Chest",
-  emoji: "🫀",
-  part: "chest",
-  colorFrom: "from-rose-100",
-  colorTo: "to-orange-100",
-  exercises: [
+  {
+    day: "Monday",
+    focus: "Chest",
+    emoji: "🫀",
+    part: "chest",
+    colorFrom: "from-rose-100",
+    colorTo: "to-orange-100",
+    exercises: [
+      // 🏋️ Machines
+      {
+        name: "Machine Chest Press (Converging)",
+        videoUrls: ["https://youtu.be/65npK4Ijz1c?si=vjVqD3x3_aSY_LGf"],
+        target: "Chest",
+        cues: [
+          "Seat: handles at mid-chest.",
+          "Elbows ~45°.",
+          "Squeeze 1 sec at front.",
+        ],
+      },
+      {
+        name: "Chest Press Machine (Iso-Lateral)",
+        videoUrls: ["https://youtu.be/hirXKlo8CNw?si=BF7CDpecimDKevbc"],
+        target: "Chest",
+        cues: ["Press one arm at a time for balance.", "Don’t lock elbows."],
+      },
+      {
+        name: "Pec Deck (Neutral Grip)",
+        videoUrls: [
+          "https://www.youtube.com/watch?v=eGjt4lk6g34&ab_channel=PureGym",
+        ],
+        target: "Chest",
+        cues: ["Seat so elbows align with mid-chest."],
+      },
 
-    // 🏋️ Machines
-    { 
-      name: "Machine Chest Press (Converging)", 
-      videoUrls: ["https://youtu.be/65npK4Ijz1c?si=vjVqD3x3_aSY_LGf"], 
-      target: "Chest", 
-      cues: ["Seat: handles at mid-chest.", "Elbows ~45°.", "Squeeze 1 sec at front."] 
-    },
-    { 
-      name: "Chest Press Machine (Iso-Lateral)", 
-      videoUrls: ["https://youtu.be/hirXKlo8CNw?si=BF7CDpecimDKevbc"], 
-      target: "Chest", 
-      cues: ["Press one arm at a time for balance.", "Don’t lock elbows."] 
-    },
-    { 
-      name: "Pec Deck (Neutral Grip)", 
-      videoUrls: ["https://www.youtube.com/watch?v=eGjt4lk6g34&ab_channel=PureGym"], 
-      target: "Chest", 
-      cues: ["Seat so elbows align with mid-chest."] 
-    },
-  
+      // 🏋️‍♂️ Weights (Barbell & Dumbbell)
+      {
+        name: "Incline Smith Press (30–35°)",
+        videoUrls: ["https://www.youtube.com/watch?v=1FWDde2IEPg"],
+        target: "Upper Chest",
+        cues: ["Touch upper chest lightly.", "Wrists stacked under bar."],
+      },
+      {
+        name: "Flat Dumbbell Press",
+        videoUrls: ["https://youtu.be/YQ2s_Y7g5Qk?si=4ubKaCc4w8JpL_bV"],
+        target: "Chest",
+        cues: ["Elbows 75–90° at bottom.", "No bounce; control."],
+      },
+      {
+        name: "Incline Dumbbell Press",
+        videoUrls: ["https://youtu.be/5CECBjd7HLQ?si=FMobLXph12fhf4Gh"],
+        target: "Upper Chest",
+        cues: ["Bench 30–45°.", "Arc towards eye-line."],
+      },
+      {
+        name: "Incline Dumbbell Hex Press",
+        videoUrls: ["https://youtu.be/WgPIxxS_YZY?si=aTpGST9UGSY8xy_o"],
+        target: "Inner/Upper Chest",
+        cues: ["Keep dumbbells squeezed together.", "Controlled tempo."],
+      },
+      {
+        name: "Decline Barbell Press",
+        videoUrls: ["https://www.youtube.com/watch?v=HwpYsDva4vs&t=10s"],
+        target: "Lower Chest",
+        cues: ["Shoulder blades retracted.", "Touch lower chest."],
+      },
+      {
+        name: "Svend Press (Plate Crush Press)",
+        videoUrls: ["https://youtu.be/2XmNv4T_Jfo?si=ewnSwTuaELll53NX&t=27s"],
+        target: "Inner Chest",
+        cues: ["Squeeze plates together throughout.", "Control tempo."],
+      },
 
-    // 🏋️‍♂️ Weights (Barbell & Dumbbell)
-    { 
-      name: "Incline Smith Press (30–35°)", 
-      videoUrls: ["https://www.youtube.com/watch?v=1FWDde2IEPg"], 
-      target: "Upper Chest", 
-      cues: ["Touch upper chest lightly.", "Wrists stacked under bar."] 
-    },
-    { 
-      name: "Flat Dumbbell Press", 
-      videoUrls: ["https://youtu.be/YQ2s_Y7g5Qk?si=4ubKaCc4w8JpL_bV"], 
-      target: "Chest", 
-      cues: ["Elbows 75–90° at bottom.", "No bounce; control."] 
-    },
-    { 
-      name: "Incline Dumbbell Press", 
-      videoUrls: ["https://youtu.be/5CECBjd7HLQ?si=FMobLXph12fhf4Gh"], 
-      target: "Upper Chest", 
-      cues: ["Bench 30–45°.", "Arc towards eye-line."] 
-    },
-    { 
-      name: "Incline Dumbbell Hex Press", 
-      videoUrls: ["https://youtu.be/WgPIxxS_YZY?si=aTpGST9UGSY8xy_o"], 
-      target: "Inner/Upper Chest", 
-      cues: ["Keep dumbbells squeezed together.", "Controlled tempo."] 
-    },
-    { 
-      name: "Decline Barbell Press", 
-      videoUrls: ["https://www.youtube.com/watch?v=HwpYsDva4vs&t=10s"], 
-      target: "Lower Chest", 
-      cues: ["Shoulder blades retracted.", "Touch lower chest."] 
-    },
-    { 
-      name: "Svend Press (Plate Crush Press)", 
-      videoUrls: ["https://youtu.be/2XmNv4T_Jfo?si=ewnSwTuaELll53NX&t=27s"], 
-      target: "Inner Chest", 
-      cues: ["Squeeze plates together throughout.", "Control tempo."] 
-    },
-
-    // 🤸 Free & Cable
-    { 
-      name: "Cable Fly (High-to-Low)", 
-      videoUrls: ["https://youtu.be/hhruLxo9yZU?si=SZjOe304hljoGbrl"], 
-      target: "Lower/ Mid Chest", 
-      cues: ["Soft elbows.", "Cross slightly for peak."] 
-    },
-    { 
-      name: "Incline Cable Press", 
-      videoUrls: ["https://youtu.be/ftfzEH6hVtU?si=5s9IiT0QehzFzt1p"], 
-      target: "Upper Chest", 
-      cues: ["Cables low to high.", "Press in slight arc toward eye line."] 
-    },
-    { 
-      name: "Standing Cable Crossover (Low-to-High)", 
-      videoUrls: ["https://youtu.be/t2C-xkBrLZM?si=EHPZVdSWiwBROEIZ"], 
-      target: "Upper Chest", 
-      cues: ["Arms sweep upward arc.", "Cross hands slightly at top."] 
-    },
-    { 
-      name: "Single-Arm Cable Fly", 
-      videoUrls: ["https://youtu.be/blzp5vSV76A?si=9hsz1NoMmwFhLd3V&t=08s"], 
-      target: "Inner Chest", 
-      cues: ["Step forward, slight torso twist.", "Pause at midline."] 
-    },
-    { 
-      name: "Decline Push-Ups (Feet Up)", 
-      videoUrls: ["https://youtu.be/5QFjmotLfW4?si=JXuGtg2oANiD5PN-&t=28s"], 
-      target: "Lower Chest", 
-      cues: ["Body straight; nose over hands."] 
-    },
-    { 
-      name: "Push-Up with Resistance Band", 
-      videoUrls: ["hhttps://youtu.be/ogTYczFYYsU?si=ZuTJ3PFuWfEcKIa1&t=35s"], 
-      target: "Chest", 
-      cues: ["Band across upper back.", "Full range, tight core."] 
-    }
-  ]
-},
-
+      // 🤸 Free & Cable
+      {
+        name: "Cable Fly (High-to-Low)",
+        videoUrls: ["https://youtu.be/hhruLxo9yZU?si=SZjOe304hljoGbrl"],
+        target: "Lower/ Mid Chest",
+        cues: ["Soft elbows.", "Cross slightly for peak."],
+      },
+      {
+        name: "Incline Cable Press",
+        videoUrls: ["https://youtu.be/ftfzEH6hVtU?si=5s9IiT0QehzFzt1p"],
+        target: "Upper Chest",
+        cues: ["Cables low to high.", "Press in slight arc toward eye line."],
+      },
+      {
+        name: "Standing Cable Crossover (Low-to-High)",
+        videoUrls: ["https://youtu.be/t2C-xkBrLZM?si=EHPZVdSWiwBROEIZ"],
+        target: "Upper Chest",
+        cues: ["Arms sweep upward arc.", "Cross hands slightly at top."],
+      },
+      {
+        name: "Single-Arm Cable Fly",
+        videoUrls: ["https://youtu.be/blzp5vSV76A?si=9hsz1NoMmwFhLd3V&t=08s"],
+        target: "Inner Chest",
+        cues: ["Step forward, slight torso twist.", "Pause at midline."],
+      },
+      {
+        name: "Decline Push-Ups (Feet Up)",
+        videoUrls: ["https://youtu.be/5QFjmotLfW4?si=JXuGtg2oANiD5PN-&t=28s"],
+        target: "Lower Chest",
+        cues: ["Body straight; nose over hands."],
+      },
+      {
+        name: "Push-Up with Resistance Band",
+        videoUrls: ["hhttps://youtu.be/ogTYczFYYsU?si=ZuTJ3PFuWfEcKIa1&t=35s"],
+        target: "Chest",
+        cues: ["Band across upper back.", "Full range, tight core."],
+      },
+    ],
+  },
 
   {
     day: "Tuesday",
@@ -738,10 +741,49 @@ function getYouTubeId(url) {
   } catch {}
   return null;
 }
+
+function parseStartSeconds(url) {
+  try {
+    const u = new URL(url);
+    // support both ?t= and ?start=
+    let t = u.searchParams.get("t") || u.searchParams.get("start");
+    if (!t) return 0;
+
+    // numeric seconds (e.g., ?t=90)
+    if (/^\d+$/.test(t)) return parseInt(t, 10);
+
+    // 1h2m3s / 2m10s / 45s / 08s, etc.
+    let sec = 0;
+    const m = t.match(/(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?/i);
+    if (m) {
+      if (m[1]) sec += 3600 * parseInt(m[1], 10);
+      if (m[2]) sec += 60 * parseInt(m[2], 10);
+      if (m[3]) sec += parseInt(m[3], 10);
+    }
+    return sec;
+  } catch {
+    return 0;
+  }
+}
+
 function getYouTubeEmbed(url) {
   const id = getYouTubeId(url);
   if (!id) return null;
-  return `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${id}&modestbranding=1&rel=0&playsinline=1`;
+
+  const start = parseStartSeconds(url);
+  const params = new URLSearchParams({
+    autoplay: "1",
+    mute: "1",
+    controls: "0",
+    loop: "1", // loop ON
+    playlist: id, // required for loop to work
+    modestbranding: "1",
+    rel: "0",
+    playsinline: "1",
+  });
+  if (start > 0) params.set("start", String(start));
+
+  return `https://www.youtube.com/embed/${id}?${params.toString()}`;
 }
 
 /***************************
@@ -813,7 +855,12 @@ function DayGrid({ selectedIndex, onSelect, onScrollToExercises }) {
           key={d.day}
           onClick={() => {
             onSelect(idx);
-            onScrollToExercises();
+            // Defer until after React commits the new day, then scroll
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                onScrollToExercises();
+              });
+            });
           }}
           className={`text-left rounded-2xl p-4 border shadow-sm hover:shadow-md transition bg-gradient-to-br ${
             d.colorFrom
@@ -912,7 +959,7 @@ function ExerciseCard({ ex, anchorId }) {
                 title={ex.name}
                 frameBorder="0"
                 allow="autoplay; encrypted-media; picture-in-picture"
-                allowFullScreen={false}
+                allowFullScreen
               />
             </div>
           ) : (
@@ -1232,10 +1279,6 @@ export default function App() {
       scrollIntoViewSmooth(exerciseSectionRef.current, "start");
     }
   };
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [selectedIndex]);
 
   const goPrev = () => {
     setSelectedIndex((i) => (i + 6) % 7);
