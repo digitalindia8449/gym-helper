@@ -39,8 +39,11 @@ function useInterval(callback, delay) {
 }
 
 // small helper: Web Audio API (ticks + tones)
+// small helper: Web Audio API (ticks + tones)
 function useBeep() {
   const audioCtxRef = useRef(null);
+  const intervalsRef = useRef([]);
+
   function ensureCtx() {
     if (!audioCtxRef.current) {
       try {
@@ -70,8 +73,32 @@ function useBeep() {
   };
 
   const tick = () => tone(1400, 40, 0.06, "square");
-  const finish = () => tone(520, 220, 0.22, "triangle");
   const accent = () => tone(880, 140, 0.18, "sine");
+
+  // 10s finish sequence: beep + vibration every ~500ms
+  const finish = (totalMs = 10000) => {
+    const start = Date.now();
+    const iv = setInterval(() => {
+      const elapsed = Date.now() - start;
+      const f = Math.floor(elapsed / 600) % 2 ? 660 : 880;
+      tone(f, 140, 0.2, "sine");
+      if (navigator.vibrate) {
+        navigator.vibrate(150);
+      }
+      if (elapsed >= totalMs) {
+        clearInterval(iv);
+      }
+    }, 500);
+    intervalsRef.current.push(iv);
+  };
+
+  // cleanup
+  useEffect(() => {
+    return () => {
+      intervalsRef.current.forEach(clearInterval);
+      intervalsRef.current = [];
+    };
+  }, []);
 
   return { tick, finish, accent };
 }
@@ -109,8 +136,8 @@ function TimerProvider({ children }) {
       if (seconds > 0 && prev !== seconds) tick();
       if ([3, 2, 1].includes(seconds) && prev !== seconds) accent();
       if (seconds === 0 && prev > 0) {
-        finish();
-        if (navigator.vibrate) navigator.vibrate([320]);
+        // 10-second alarm (sound + vibration)
+        finish(10000);
       }
     }
     prevSec.current = seconds;
@@ -1026,7 +1053,8 @@ function Header({ selectedIndex, setSelectedIndex, onScrollToExercises }) {
           </div>
           <div className="truncate">
             <h1 className="text-base xs:text-lg sm:text-xl font-bold tracking-tight flex items-center gap-1.5 xs:gap-2">
-              Gym Helper <Dumbbell className="w-4 h-4 sm:w-5 sm:h-5 hidden xs:block" />
+              Gym Helper{" "}
+              <Dumbbell className="w-4 h-4 sm:w-5 sm:h-5 hidden xs:block" />
             </h1>
             <p className="text-[10px] xs:text-[11px] sm:text-xs text-gray-500 dark:text-gray-400">
               Simple · Hinglish · Beginner-friendly
@@ -1454,7 +1482,8 @@ function MobileBar({ onPrev, onNext }) {
           }}
           className="px-3 py-2 rounded-xl shadow bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex items-center justify-center gap-1.5"
         >
-          <Clock className="w-4 h-4" /> <span className="text-xs">1:00 Rest</span>
+          <Clock className="w-4 h-4" />{" "}
+          <span className="text-xs">1:00 Rest</span>
         </button>
         <button
           onClick={onNext}
