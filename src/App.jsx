@@ -18,6 +18,9 @@ import {
   Heart,
   Dumbbell,
   ExternalLink,
+  HeartPulse, // ⬅️ add
+  StretchHorizontal, // ⬅️ add
+  BedDouble, // ⬅️ add
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -195,140 +198,6 @@ function scrollIntoViewSmooth(el, block = "start") {
 }
 
 /***************************
- * SMALL INLINE SVGs (body-part hints)
- ***************************/
-const BodySvg = ({ part = "full", className = "w-10 h-10" }) => {
-  if (part === "chest")
-    return (
-      <svg viewBox="0 0 64 64" className={className} aria-hidden>
-        <rect
-          x="8"
-          y="18"
-          width="48"
-          height="28"
-          rx="8"
-          className="fill-rose-200 dark:fill-rose-900/50"
-        />
-        <circle
-          cx="24"
-          cy="32"
-          r="3"
-          className="fill-rose-400 dark:fill-rose-600"
-        />
-        <circle
-          cx="40"
-          cy="32"
-          r="3"
-          className="fill-rose-400 dark:fill-rose-600"
-        />
-      </svg>
-    );
-  if (part === "back")
-    return (
-      <svg viewBox="0 0 64 64" className={className} aria-hidden>
-        <path
-          d="M16 50 C18 30, 46 30, 48 50"
-          className="fill-indigo-200 dark:fill-indigo-900/50"
-        />
-        <rect
-          x="20"
-          y="18"
-          width="24"
-          height="12"
-          rx="6"
-          className="fill-indigo-300 dark:fill-indigo-700"
-        />
-      </svg>
-    );
-  if (part === "legs")
-    return (
-      <svg viewBox="0 0 64 64" className={className} aria-hidden>
-        <rect
-          x="18"
-          y="18"
-          width="10"
-          height="30"
-          rx="4"
-          className="fill-green-300 dark:fill-green-800"
-        />
-        <rect
-          x="36"
-          y="18"
-          width="10"
-          height="30"
-          rx="4"
-          className="fill-green-300 dark:fill-green-800"
-        />
-      </svg>
-    );
-  if (part === "shoulders")
-    return (
-      <svg viewBox="0 0 64 64" className={className} aria-hidden>
-        <circle
-          cx="20"
-          cy="26"
-          r="8"
-          className="fill-amber-300 dark:fill-amber-800"
-        />
-        <circle
-          cx="44"
-          cy="26"
-          r="8"
-          className="fill-amber-300 dark:fill-amber-800"
-        />
-      </svg>
-    );
-  if (part === "arms")
-    return (
-      <svg viewBox="0 0 64 64" className={className} aria-hidden>
-        <path
-          d="M10 40 Q22 20 34 34 T54 40"
-          className="fill-purple-300 dark:fill-purple-800"
-        />
-      </svg>
-    );
-  if (part === "core")
-    return (
-      <svg viewBox="0 0 64 64" className={className} aria-hidden>
-        <rect
-          x="24"
-          y="18"
-          width="16"
-          height="28"
-          rx="4"
-          className="fill-cyan-300 dark:fill-cyan-800"
-        />
-        <line
-          x1="32"
-          y1="18"
-          x2="32"
-          y2="46"
-          className="stroke-cyan-600 dark:stroke-cyan-400"
-          strokeWidth="2"
-        />
-      </svg>
-    );
-  return (
-    <svg viewBox="0 0 64 64" className={className} aria-hidden>
-      <circle
-        cx="32"
-        cy="12"
-        r="6"
-        className="fill-zinc-300 dark:fill-zinc-700"
-      />
-      <rect
-        x="20"
-        y="20"
-        width="24"
-        height="24"
-        rx="6"
-        className="fill-zinc-200 dark:fill-zinc-800"
-      />
-    </svg>
-  );
-};
-
-/***************************
  * DATA: WEEK PLAN + EXERCISES (2025-ready)
  * Note: Each exercise can have multiple videoUrls; first one auto-embeds.
  ***************************/
@@ -336,7 +205,7 @@ const WEEK_PLAN = [
   {
     day: "Monday",
     focus: "Chest",
-    emoji: "🫀",
+    icon: HeartPulse,
     part: "chest",
     colorFrom: "from-rose-100",
     colorTo: "to-orange-100",
@@ -483,7 +352,7 @@ const WEEK_PLAN = [
   {
     day: "Tuesday",
     focus: "Back",
-    emoji: "🦴",
+    icon: StretchHorizontal,
     part: "back",
     colorFrom: "from-indigo-100",
     colorTo: "to-sky-100",
@@ -621,7 +490,7 @@ const WEEK_PLAN = [
   {
     day: "Wednesday",
     focus: "Legs",
-    emoji: "🦵",
+    icon: Dumbbell,
     part: "legs",
     colorFrom: "from-green-100",
     colorTo: "to-lime-100",
@@ -685,7 +554,7 @@ const WEEK_PLAN = [
   {
     day: "Thursday",
     focus: "Shoulders",
-    emoji: "🧍",
+    icon: Dumbbell,
     part: "shoulders",
     colorFrom: "from-amber-100",
     colorTo: "to-yellow-100",
@@ -737,7 +606,7 @@ const WEEK_PLAN = [
   {
     day: "Friday",
     focus: "Arms (Biceps + Triceps)",
-    emoji: "💪",
+    icon: Dumbbell,
     part: "arms",
     colorFrom: "from-purple-100",
     colorTo: "to-fuchsia-100",
@@ -789,7 +658,7 @@ const WEEK_PLAN = [
   {
     day: "Saturday",
     focus: "Core + Mobility",
-    emoji: "🧘",
+    icon: StretchHorizontal,
     part: "core",
     colorFrom: "from-cyan-100",
     colorTo: "to-teal-100",
@@ -841,7 +710,7 @@ const WEEK_PLAN = [
   {
     day: "Sunday",
     focus: "Rest / Recovery",
-    emoji: "🛌",
+    icon: BedDouble,
     part: "full",
     colorFrom: "from-slate-100",
     colorTo: "to-zinc-100",
@@ -1115,14 +984,15 @@ function DayGrid({ selectedIndex, onSelect, onScrollToExercises }) {
               <div className="text-[10px] xs:text-xs text-gray-600 dark:text-gray-400">
                 {d.day}
               </div>
-              <div className="font-semibold text-sm xs:text-base flex items-center gap-1.5 xs:gap-2">
-                {d.emoji} {d.focus}
+              <div className="font-semibold text-sm xs:text-base">
+                {d.focus}
               </div>
+
               <div className="text-[10px] xs:text-[11px] mt-1 text-gray-500 dark:text-gray-400">
                 Tap to open
               </div>
             </div>
-            <BodySvg part={d.part} className="w-8 h-8 xs:w-10 xs:h-10" />
+            <d.icon className="w-8 h-8 xs:w-10 xs:h-10 text-gray-700 dark:text-gray-300 opacity-80" />
           </div>
         </button>
       ))}
@@ -1585,10 +1455,7 @@ export default function App() {
                 />
               </div>
               <div className="text-[12px] xs:text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">
-                <BodySvg
-                  part={selectedDay.part}
-                  className="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8"
-                />
+                <selectedDay.icon className="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8" />
                 <span className="font-semibold">{selectedDay.day}:</span>{" "}
                 {selectedDay.focus}
               </div>
