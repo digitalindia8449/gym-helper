@@ -1092,7 +1092,7 @@ function Header({ selectedIndex, setSelectedIndex, onScrollToExercises }) {
 
 function DayGrid({ selectedIndex, onSelect, onScrollToExercises }) {
   return (
-    <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2.5 xs:gap-3">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2.5 sm:gap-3">
       {WEEK_PLAN.map((d, idx) => (
         <button
           key={d.day}
