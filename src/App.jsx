@@ -24,6 +24,27 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+// ---- Font debug: log whether Manrope is loaded ----
+if (document?.fonts?.ready) {
+  document.fonts.ready.then(() => {
+    const loaded = document.fonts.check('16px "Manrope"');
+    const bodyFont = getComputedStyle(document.body).fontFamily;
+    console.log(
+      `[FontCheck] Manrope loaded: ${loaded} | body font-family: ${bodyFont}`
+    );
+  });
+} else {
+  // Fallback if Font Loading API isn’t available
+  setTimeout(() => {
+    const bodyFont = getComputedStyle(document.body).fontFamily;
+    console.log(
+      `[FontCheck] (no Font API) body font-family: ${bodyFont}`
+    );
+  }, 500);
+}
+// ---------------------------------------------------
+
+
 /***************************
  * GLOBAL TIMER (PERSISTENT + QUICK-ACCESS)
  ***************************/
